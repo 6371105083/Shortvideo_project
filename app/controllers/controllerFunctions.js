@@ -1,19 +1,19 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const UserModel = require('./UserModel');
+const UserModel = require('../models/UserModels');
 
 const router = express.Router();
 //Register
 router.post('/register', async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { username,email, password,profile_picture,bio,created_at } = req.body;
 
     if (!username || !password) {
       return res.status(400).json({ error: 'Username and password are required.' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new UserModel({ username, password: hashedPassword });
+    const user = new UserModel({ username, password: hashedPassword,email,profile_picture,bio,created_at });
     await user.save();
 
     res.status(200).json({ message: 'User Registered Successfully.' });

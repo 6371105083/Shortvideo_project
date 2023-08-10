@@ -23,7 +23,7 @@ const reelLikeSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: false,
+    timestamps: true,
   }
 );
 
