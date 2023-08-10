@@ -1,12 +1,4 @@
-import {v2 as cloudinary } from "cloudinary";
-
 const cloudinary = require("cloudinary").v2;
-
-
-// Rest of your code...
-
-
-// Set your Cloudinary configuration
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -14,7 +6,7 @@ cloudinary.config({
   secure:true
 });
 
-export const generateSignature = (req,res,next)=>{
+const generateSignature = (req,res,next)=>{
     // const {folder} =req.body;
 
     // if(!folder){
@@ -36,3 +28,4 @@ export const generateSignature = (req,res,next)=>{
     }
 }
 
+module.exports = generateSignature;

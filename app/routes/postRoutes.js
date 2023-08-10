@@ -1,9 +1,17 @@
-    // postRoutes.js
-    import express from "express";
-    import { createVideo } from "../controllers/postController.js";
+// const express = require("express");
+// const  createVideo = require("../controllers/postController.js");
 
-    const router = express.Router();
+// const router = express.Router();
 
-    router.post("/create-video", createVideo);
+// router.post("/create-video", createVideo);
 
-    export default router;
+// module.exports = router;
+
+const express = require("express");
+const generateSignature = require("../controllers/userController.js");
+
+const router = express.Router();
+
+router.post("/generate-signature", generateSignature);
+
+module.exports=router;

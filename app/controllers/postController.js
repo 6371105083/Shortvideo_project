@@ -1,5 +1,4 @@
-
-export const createVideo = async (req, res, next) => {
+  const createVideo = async (req, res, next) => {
     const {  videoUrl } = req.body;
 
     if (!videoUrl) {
@@ -17,3 +16,6 @@ export const createVideo = async (req, res, next) => {
         next(error);
     }
 }
+module.exports = {
+    createVideo
+};
