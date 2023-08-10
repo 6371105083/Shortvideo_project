@@ -12,7 +12,7 @@ dotenv.config();
 
 
 const mongoose = require('mongoose');
-const UserController = require('./ControllerFunction');
+const UserController = require('./app/controllers/controllerFunctions.js');
 
 app.use(express.json());
 
