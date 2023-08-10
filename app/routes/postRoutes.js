@@ -1,17 +1,8 @@
-// const express = require("express");
-// const  createVideo = require("../controllers/postController.js");
-
-// const router = express.Router();
-
-// router.post("/create-video", createVideo);
-
-// module.exports = router;
-
 const express = require("express");
-const generateSignature = require("../controllers/userController.js");
+const  createVideo = require("../controllers/video.js");
 
 const router = express.Router();
 
-router.post("/generate-signature", generateSignature);
+router.post("/create-video", createVideo);
 
-module.exports=router;
+module.exports = router;
