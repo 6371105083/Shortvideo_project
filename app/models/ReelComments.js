@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const reelCommentSchema = new mongoose.Schema({
-  reel_comment_id: {
-    type: String,
-    required: true,
-    unique: true,
-  },
+  // reel_comment_id: {
+  //   type: String,
+  //   required: true,
+  //   unique: true,         
+  // },
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',

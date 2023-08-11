@@ -1,17 +1,17 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
-const connectDB = require("../prject_reels/config/db.js"); 
+const connectDB = require("../prject_reels/config/db.js");
 // const router = require("./app/routes/userRoutes"); // Import videoRoutes
 const router = require("./app/routes/postRoutes");
 const user = require("./app/routes/userRoutes")
 const errorHandler = require("./app/middlewares/authMiddleware")
-const likesRoutes = require ("./app/routes/likesRoutes.js")
+const likesRoutes = require("./app/routes/likesRoutes.js")
+const commentsRoutes = require("./app/routes/commentsRoutes.js")
 
 dotenv.config();
 
 const app = express();
-//UsersTable
 
 
 const mongoose = require('mongoose');
@@ -27,9 +27,6 @@ app.get('/', (req, res) => {
 
 app.use(UserController);
 
-
-//ReelsTable
-
 // Express App
 const port = process.env.PORT || 5000;
 
@@ -41,9 +38,7 @@ app.use(express.json());
 app.use(router);
 app.use(user);
 app.use(likesRoutes);
-//app.use(router);  
-//app.use( postRoutes);
-
+app.use(commentsRoutes);
 app.use(errorHandler);
 
 // Listen to the requests

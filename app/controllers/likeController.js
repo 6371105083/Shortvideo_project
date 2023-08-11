@@ -4,7 +4,7 @@ const ReelLike = require('../models/ReelLikes');
 const createReelLike = async (req, res) => {
   try {
     const { user_id, reel_id } = req.body;
-    const newReelLike = new ReelLike({ user_id, reel_id });
+    const newReelLike = new ReelLike({ user_id, reel_id  });
     await newReelLike.save();
 
     res.status(201).json({ message: 'Reel like created successfully', reelLike: newReelLike });

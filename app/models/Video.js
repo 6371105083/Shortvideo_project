@@ -7,7 +7,7 @@ const videoSchema = new mongoose.Schema(
       ref: 'User', 
       required: true,
     },
-    video_url: {
+    videoUrl: {
       type: String,
       required: true,
     },
@@ -16,7 +16,7 @@ const videoSchema = new mongoose.Schema(
     },
     created_at: {
       type: Date,
-      default: Date.now,
+      default: Date.now, 
     },
   },
   {
