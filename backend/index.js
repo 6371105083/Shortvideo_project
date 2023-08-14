@@ -9,9 +9,18 @@ const errorHandler = require("./app/middlewares/authMiddleware")
 const likesRoutes = require("./app/routes/likesRoutes.js")
 const commentsRoutes = require("./app/routes/commentsRoutes.js")
 
+
 dotenv.config();
 
 const app = express();
+
+const allowedOrigins = ['http://localhost:5173'];
+
+app.use(cors({
+  origin: allowedOrigins,
+  allowedHeaders: ['Content-Type', 'Authorization'], // Add 'Content-Type' to the allowed headers
+}));
+
 
 
 const mongoose = require('mongoose');
@@ -40,6 +49,8 @@ app.use(user);
 app.use(likesRoutes);
 app.use(commentsRoutes);
 app.use(errorHandler);
+
+
 
 // Listen to the requests
 app.listen(port, async () => {

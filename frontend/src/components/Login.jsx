@@ -11,25 +11,27 @@ const Login = () => {
 
     const ProceedLogin = (e) => {
         e.preventDefault();
-
+  
         if (validate()) {
+            const regobj={username,password};
             //implementation
            // console.log('proceed');
-            fetch("http://localhost:8280/user/" + username).then((res) => {
-                return res.json();
-            }).then((resp) => {
+            fetch("http://localhost:5000/login", {
+                method: "POST",
+                headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify(regobj)
+            })
+            .then((res) => res.json())
+            .then((resp) => {
                 //console.log(resp)
-                if (Object.keys(resp).length === 0) {
-                    toast.error('Please Enter Valid Username')
+                if (resp.message === 'Your Login Successful.') {
+                    toast.success('Success');
+                    usenavigate('/');
                 } else {
-                    if (resp.password === password) {
-                        toast.success('Success');
-                         usenavigate('/');
-                    } else {
-                        toast.error('Please Enter valid credintials')
-                    }
+                    toast.error('Please Enter valid credentials');
                 }
-            }).catch((err) => {
+            })
+            .catch((err) => {
                 toast.error('Login Failed due to :' + err.message);
             });
         }
@@ -48,7 +50,7 @@ const Login = () => {
     }
     return (
         <>
-            <div className="row">
+            <div className="row login">
                 <div className="offset-lg-3  col-lg-6">
                     <form onSubmit={ProceedLogin} className="container">
                         <div className="card">

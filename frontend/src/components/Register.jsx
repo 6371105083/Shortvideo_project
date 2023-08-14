@@ -4,27 +4,27 @@ import { toast } from 'react-toastify';
 
 
 const Register = () => {
-    const [id, idchange] = useState("");
-    const [name, namechange] = useState("");
+    const [username, usernamechange] = useState("");
+
     const [password, passwordchange] = useState("");
     const [email, emailchange] = useState("");
-    const [phone, phonechange] = useState("");
-    const [country, countrychange] = useState("India");
-    const [address, addresschange] = useState("");
-    const [gender, genderchange] = useState("");
+    const [profile_picture, profile_picturechange] = useState("");
 
+    const [bio, biochange] = useState("");
+    // const [gender, genderchange] = useState("");
+    // const [country, countrychange] = useState("India");
     const navigate = useNavigate();
     const isValidate = () => {
         let isProceed = true;
         let errormessage = 'Please enter the value in';
-        if (id === null || id === "") {
+        if (username === null || username === "") {
             isProceed = false;
             errormessage += ' Username';
         }
-        if (name === null || name === "") {
-            isProceed = false;
-            errormessage += ' FullName';
-        }
+        // if (name === null || name === "") {
+        //     isProceed = false;
+        //     errormessage += ' FullName';
+        // }
         if (password === null || password === "") {
             isProceed = false;
             errormessage += ' password';
@@ -33,14 +33,14 @@ const Register = () => {
             isProceed = false;
             errormessage += ' Email';
         }
-        if (phone === null || phone === "") {
-            isProceed = false;
-            errormessage += ' Phone Number';
-        }
-        if (country === null || country === "") {
-            isProceed = false;
-            errormessage += ' Country';
-        }
+        // if (phone === null || phone === "") {
+        //     isProceed = false;
+        //     errormessage += ' Phone Number';
+        // }
+        // if (country === null || country === "") {
+        //     isProceed = false;
+        //     errormessage += ' Country';
+        // }
         if (!isProceed) {
             toast.warning(errormessage);
         } else {
@@ -60,12 +60,12 @@ const Register = () => {
             }
             //validation for MobileNumber
 
-            if (/^[0-9]{10}$/.test(phone)) {
+            // if (/^[0-9]{10}$/.test(phone)) {
 
-            } else {
-                isProceed = false;
-                toast.warning('Please enter the 10 digit mobile number');
-            }
+            // } else {
+            //     isProceed = false;
+            //     toast.warning('Please enter the 10 digit mobile number');
+            // }
 
         }
         return isProceed;
@@ -74,13 +74,13 @@ const Register = () => {
     const handlesubmit = async (e) => {
 
         e.preventDefault();
-        let regobj = { id, name, password, email, phone, country, address, gender };
+        let regobj = { username, password, email, profile_picture, bio };
         if (isValidate()) {
             console.log(regobj);
             try {
-                const res = await fetch("/register", {
+                const res = await fetch('http://localhost:5000/register', {
                     method: "POST",
-                    headers: { 'content-type': 'application/json' },
+                    headers: { 'Content-type': 'application/json' },
                     body: JSON.stringify(regobj)
                 });
                 if (res.ok) {
@@ -88,7 +88,7 @@ const Register = () => {
                     navigate('/login');
                 } else {
                     const errorMessage = await res.text();
-                    toast.error('Failed: ' + err.message);
+                    toast.error('Failed: ' + message);
                 }
             } catch (err) {
                 toast.error('Failed: ' + err.message);
@@ -108,47 +108,50 @@ const Register = () => {
             // }
         }
     }
-        return (
-            <>
-                <div className="offset-lg-3 col-lg-6">
-                    <form className="container" onSubmit={handlesubmit}>
-                        <div className="card">
-                            <div className="card-header">
-                                <h1>User Registration</h1>
-                            </div>
-                            <div className="card-body">
-                                <div className="row">
-                                    <div className="col-lg-6">
-                                        <div className="form-group">
-                                            <label >User Name<span className="errmsg">*</span></label>
-                                            <input value={id} onChange={e => idchange(e.target.value)} className="form-control"></input>
-                                        </div>
+    return (
+        <>
+            <div className="offset-lg-3 col-lg-6 register">
+                <form className="container" onSubmit={handlesubmit}>
+                    <div className="card">
+                        <div className="card-header">
+                            <h1>User Registration</h1>
+                        </div>
+                        <div className="card-body">
+                            <div className="row">
+                                <div className="col-lg-6">
+                                    <div className="form-group">
+                                        <label >User Name<span className="errmsg">*</span></label>
+                                        <input value={username} onChange={e => usernamechange(e.target.value)} className="form-control"></input>
                                     </div>
-                                    <div className="col-lg-6">
-                                        <div className="form-group">
-                                            <label >Password<span className="errmsg">*</span></label>
-                                            <input required value={password} onChange={e => passwordchange(e.target.value)} type="password" className="form-control"></input>
-                                        </div>
+                                </div>
+                                <div className="col-lg-6">
+                                    <div className="form-group">
+                                        <label >Password<span className="errmsg">*</span></label>
+                                        <input required value={password} onChange={e => passwordchange(e.target.value)} type="password" className="form-control"></input>
                                     </div>
-                                    <div className="col-lg-6">
-                                        <div className="form-group">
-                                            <label >Full Name<span className="errmsg">*</span></label>
-                                            <input value={name} onChange={e => namechange(e.target.value)} className="form-control"></input>
-                                        </div>
+                                </div>
+
+                                <div className="col-lg-6">
+                                    <div className="form-group mt-3">
+                                        <label >Email<span className="errmsg">*</span></label>
+                                        <input value={email} onChange={e => emailchange(e.target.value)} className="form-control"></input>
                                     </div>
-                                    <div className="col-lg-6">
-                                        <div className="form-group">
-                                            <label >Email<span className="errmsg">*</span></label>
-                                            <input value={email} onChange={e => emailchange(e.target.value)} className="form-control"></input>
-                                        </div>
+                                </div>
+
+                                <div className="col-lg-6">
+                                    <div className="form-group mt-3">
+                                        <label >Profile Picture</label>
+                                        <input type="file" value={profile_picture} onChange={e => profile_picturechange(e.target.value)} className="form-control"></input>
                                     </div>
-                                    <div className="col-lg-6">
+                                </div>
+
+                                {/* <div className="col-lg-6">
                                         <div className="form-group">
                                             <label >Phone Number<span className="errmsg">*</span></label>
                                             <input value={phone} onChange={e => phonechange(e.target.value)} className="form-control"></input>
                                         </div>
-                                    </div>
-                                    <div className="col-lg-6">
+                                    </div> */}
+                                {/* <div className="col-lg-6">
                                         <div className="form-group">
                                             <label >Country<span className="errmsg">*</span></label>
                                             <select value={country} onChange={e => countrychange(e.target.value)} className="form-control">
@@ -158,14 +161,14 @@ const Register = () => {
                                                 <option value="singapore">Others</option>
                                             </select>
                                         </div>
+                                    </div> */}
+                                <div className="col-lg-12">
+                                    <div className="form-group mt-3">
+                                        <label >Write Your Bio</label>
+                                        <textarea value={bio} onChange={e => biochange(e.target.value)} className="form-control"></textarea>
                                     </div>
-                                    <div className="col-lg-12">
-                                        <div className="form-group">
-                                            <label >Address</label>
-                                            <textarea value={address} onChange={e => addresschange(e.target.value)} className="form-control"></textarea>
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-6">
+                                </div>
+                                {/* <div className="col-lg-6">
                                         <div className="form-group">
                                             <label>Gender</label><br></br>
                                             <input type="radio" checked={gender === 'male'} onChange={e => genderchange(e.target.value)} name="gender" value="male" className="app-check "></input>
@@ -173,17 +176,17 @@ const Register = () => {
                                             <input type="radio" checked={gender === 'female'} onChange={e => genderchange(e.target.value)} name="gender" value="female" className="app-check ms-3"></input>
                                             <label>Female</label>
                                         </div>
-                                    </div>
-                                </div>
-                                <div className="card-footer">
-                                    <button type="submit" className="btn btn-primary">Register</button>
-                                    <Link className="btn btn-danger ms-2" to={'/login'}>Back</Link>
-                                </div>
+                                    </div> */}
+                            </div>
+                            <div className="card-footer">
+                                <button type="submit" className="btn btn-primary">Register</button>
+                                <Link className="btn btn-danger ms-2" to={'/login'}>Back</Link>
                             </div>
                         </div>
-                    </form>
-                </div>
-            </>
-        )
-    }
-    export default Register;
+                    </div>
+                </form>
+            </div>
+        </>
+    )
+}
+export default Register;

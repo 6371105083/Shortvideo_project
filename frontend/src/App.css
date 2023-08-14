@@ -1,4 +1,4 @@
-#root {
+.register,.login {
   max-width: 1280px;
   margin: 0 auto;
   padding: 4rem;
@@ -55,3 +55,14 @@ app-check{
 }
 
 
+/* Navigaton */
+
+#navbars{
+  text-align: right;
+  margin-left: 950px;
+  margin-top: -280px;
+  
+}
+.paragraph{
+  margin-top: 100px;
+}
