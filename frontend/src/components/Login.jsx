@@ -10,35 +10,36 @@ const Login = () => {
 
     const usenavigate = useNavigate();
 
-    const ProceedLogin = (e) => {
+  const ProceedLogin = async (e) => {
         e.preventDefault();
-  
+
         if (validate()) {
-            const regobj={username,password};
-            //implementation
-           // console.log('proceed');
-            fetch("http://localhost:5000/login", {
-                method: "POST",
-                headers: { 'Content-type': 'application/json' },
-                body: JSON.stringify(regobj)
-            })
-            .then((res) => res.json())
-            .then((resp) => {
-                //console.log(resp)
+            const regobj = { username, password };
+
+            try {
+                const response = await fetch("http://localhost:5000/login", {
+                    method: "POST",
+                    headers: { 'Content-type': 'application/json' },
+                    body: JSON.stringify(regobj)
+                });
+
+                const resp = await response.json();
+
                 if (resp.message === 'Your Login Successful.') {
-                    const token=resp.token;
-                    //const usename=resp.username;
+                    const { token, user_id } = resp;
+                    
                     toast.success('Success');
-                    localStorage.setItem('token',token);
-                    localStorage.setItem('username',username)
+                    localStorage.setItem('token', token);
+                    localStorage.setItem('username', username);
+                    localStorage.setItem('user_id', user_id);
+                    
                     usenavigate('/');
                 } else {
                     toast.error('Please Enter valid credentials');
                 }
-            })
-            .catch((err) => {
+            } catch (err) {
                 toast.error('Login Failed due to :' + err.message);
-            });
+            }
         }
     }
     const validate = () => {

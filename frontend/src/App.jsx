@@ -6,6 +6,7 @@ import './App.css'
 import Login from './components/Login'
 import Home from './components/Home';
 import Register from './components/Register'
+import Profile from './components/Profile';
 import {ToastContainer} from 'react-toastify';
 import { createContext, useReducer } from 'react';
 
@@ -24,6 +25,7 @@ function App() {
           <Route path='/' element={<Home></Home>}> </Route>
           <Route path='/login' element={<Login></Login>}> </Route>
           <Route path='/register' element={<Register></Register>}> </Route>
+          <Route path='/profile' element={<Profile></Profile>}></Route>
         </Routes>
       </BrowserRouter>
       

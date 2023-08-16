@@ -34,19 +34,18 @@ router.post('/login', async (req, res) => {
     const user = await UserModel.findOne({ username });
     
     if (user && await bcrypt.compare(password, user.password)) {
-
-     const token = jwt.sign({ user },SecretKey);
-    //  console.log(token);
-    // res.send(token);
-      res.json({username,token, message: 'Your Login Successful.' });
-  
+      const token = jwt.sign({ user }, SecretKey);
+      const user_id = user._id; 
+      
+      res.json({ username, token, user_id, message: 'Your Login Successful.' });
     } else {
-      res.status(403).json({ error: 'You have Entered Wrong Username or Password' });
+      res.status(403).json({ error: 'You have entered wrong Username or Password.' });
     }
   } catch (error) {
-    res.status(500).json({ error: `Internal server Error` });
+    res.status(500).json({ error: 'Internal server error.' });
   }
 });
+
 
 // const jwt =require("jsonwebtoken");
 // const createToken = async()=>{
