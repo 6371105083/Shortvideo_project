@@ -38,7 +38,8 @@ router.post('/login', async (req, res) => {
      const token = jwt.sign({ user },SecretKey);
     //  console.log(token);
     // res.send(token);
-      res.json({token, message: 'Your Login Successful.' });
+      res.json({username,token, message: 'Your Login Successful.' });
+  
     } else {
       res.status(403).json({ error: 'You have Entered Wrong Username or Password' });
     }

@@ -18,7 +18,7 @@ const allowedOrigins = ['http://localhost:5173'];
 
 app.use(cors({
   origin: allowedOrigins,
-  allowedHeaders: ['Content-Type', 'Authorization'], // Add 'Content-Type' to the allowed headers
+  // allowedHeaders: ['Content-Type', 'Authorization'], // Add 'Content-Type' to the allowed headers
 }));
 
 

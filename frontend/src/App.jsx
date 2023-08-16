@@ -7,10 +7,7 @@ import Login from './components/Login'
 import Home from './components/Home';
 import Register from './components/Register'
 import {ToastContainer} from 'react-toastify';
-
-
-
-
+import { createContext, useReducer } from 'react';
 
 
 
@@ -18,7 +15,9 @@ function App() {
 
   return (
     <>
-     
+    
+
+
 <ToastContainer theme='colored' ></ToastContainer>
       <BrowserRouter>
         <Routes>
@@ -27,6 +26,7 @@ function App() {
           <Route path='/register' element={<Register></Register>}> </Route>
         </Routes>
       </BrowserRouter>
+      
     </>
   )
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import NavBar from "./subComponents/Navbar";
 
 
 const Login = () => {
@@ -25,7 +26,11 @@ const Login = () => {
             .then((resp) => {
                 //console.log(resp)
                 if (resp.message === 'Your Login Successful.') {
+                    const token=resp.token;
+                    //const usename=resp.username;
                     toast.success('Success');
+                    localStorage.setItem('token',token);
+                    localStorage.setItem('username',username)
                     usenavigate('/');
                 } else {
                     toast.error('Please Enter valid credentials');
@@ -50,6 +55,7 @@ const Login = () => {
     }
     return (
         <>
+        <NavBar></NavBar>
             <div className="row login">
                 <div className="offset-lg-3  col-lg-6">
                     <form onSubmit={ProceedLogin} className="container">
@@ -77,6 +83,7 @@ const Login = () => {
                 </div>
 
             </div>
+            
         </>
     )
 }

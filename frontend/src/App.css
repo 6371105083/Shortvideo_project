@@ -58,9 +58,12 @@ app-check{
 /* Navigaton */
 
 #navbars{
+  display: flex;
+  flex-direction: row;
+  
   text-align: right;
-  margin-left: 950px;
-  margin-top: -280px;
+  /* margin-left: 950px;
+  margin-top: -280px; */
   
 }
 .paragraph{

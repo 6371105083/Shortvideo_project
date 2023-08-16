@@ -1,0 +1,78 @@
+ // localStorage.setItem("token",token);
+                    // localStorage.setItem("username",username);
+                    // console.log("login Successfully");
+
+
+
+
+
+
+
+
+
+
+
+
+                        // const data= await response.json();
+            // console.log(data);
+            // const{token,username}=data;
+            // console.log(token);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            // import { Link } from "react-router-dom";
+// const NavBar = () => {
+
+//     return (
+//         <>
+//             <nav className="bg-gray-800 text-white p-4">
+//                 <div className="flex justify-between items-center">
+//                     <div>
+//                         <h1 className="text-2xl font-semibold">Hyscaler Reel</h1>
+//                     </div>
+//                     <div className="space-x-4 ">
+//                         <Link
+//                             to="/"
+//                             className="  hover:text-white no-underline "
+//                         >
+//                             Home
+//                         </Link>
+
+
+//                         <Link
+//                             to="/register"
+//                             className="hover:text-white no-underline "
+//                         >
+//                             Register
+//                         </Link>
+//                         <Link
+//                             to="/login"
+//                             className="hover:text-white no-underline "
+//                         >
+//                             Login
+//                         </Link>
+//                     </div>
+//                 </div>
+//             </nav>
+
+//         </>
+//     )
+
+// }
+// export default NavBar;
