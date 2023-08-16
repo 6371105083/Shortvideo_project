@@ -6,11 +6,10 @@ import NavBar from "./subComponents/Navbar";
 
 const Register = () => {
     const [username, usernamechange] = useState("");
-
     const [password, passwordchange] = useState("");
+    const [cPassword, cPasswordchange] = useState("");
     const [email, emailchange] = useState("");
-    const [profile_picture, profile_picturechange] = useState("");
-    const [bio, biochange] = useState("");
+   
     const navigate = useNavigate();
     const isValidate = () => {
         let isProceed = true;
@@ -23,6 +22,10 @@ const Register = () => {
         if (password === null || password === "") {
             isProceed = false;
             errormessage += ' password';
+        }
+        if (password !== cPassword) { 
+            isProceed = false;
+            errormessage += ' Passwords do not match';
         }
         if (email === null || email === "") {
             isProceed = false;
@@ -54,7 +57,7 @@ const Register = () => {
     const handlesubmit = async (e) => {
 
         e.preventDefault();
-        let regobj = { username, password, email, profile_picture, bio };
+        let regobj = { username, password, email,cPassword };
         if (isValidate()) {
            console.log(regobj);
             try {
@@ -68,7 +71,7 @@ const Register = () => {
                     navigate('/login');
                 } else {
                     const errorMessage = await res.text();
-                    toast.error('Failed: ' + message);
+                    toast.error('Failed: ' + errorMessage);
                 }
             } catch (err) {
                 toast.error('Failed: ' + err.message);
@@ -89,37 +92,44 @@ const Register = () => {
                                 <div className="col-lg-6">
                                     <div className="form-group">
                                         <label >User Name<span className="errmsg">*</span></label>
-                                        <input value={username} onChange={e => usernamechange(e.target.value)} className="form-control"></input>
+                                        <input placeholder="Enter UserName" value={username} onChange={e => usernamechange(e.target.value)} className="form-control"></input>
                                     </div>
                                 </div>
                                 <div className="col-lg-6">
                                     <div className="form-group">
                                         <label >Password<span className="errmsg">*</span></label>
-                                        <input required value={password} onChange={e => passwordchange(e.target.value)} type="password" className="form-control"></input>
+                                        <input placeholder="Enter Your password" required value={password} onChange={e => passwordchange(e.target.value)} type="password" className="form-control"></input>
+                                    </div>
+                                </div>
+
+                                <div className="col-lg-6 mt-3">
+                                    <div className="form-group">
+                                        <label >Confirm Password<span className="errmsg">*</span></label>
+                                        <input placeholder="Confirm password" required value={cPassword} onChange={e => cPasswordchange(e.target.value)} type="password" className="form-control"></input>
                                     </div>
                                 </div>
 
                                 <div className="col-lg-6">
                                     <div className="form-group mt-3">
                                         <label >Email<span className="errmsg">*</span></label>
-                                        <input value={email} onChange={e => emailchange(e.target.value)} className="form-control"></input>
+                                        <input placeholder="Enter Your E-mail" value={email} onChange={e => emailchange(e.target.value)} className="form-control"></input>
                                     </div>
                                 </div>
 
-                                <div className="col-lg-6">
+                                {/* <div className="col-lg-6">
                                     <div className="form-group mt-3">
                                         <label >Profile Picture</label>
                                         <input type="file" value={profile_picture} onChange={e => profile_picturechange(e.target.value)} className="form-control"></input>
                                     </div>
-                                </div>
-                                <div className="col-lg-12">
+                                </div> */}
+                                {/* <div className="col-lg-12">
                                     <div className="form-group mt-3">
                                         <label >Write Your Bio</label>
                                         <textarea value={bio} onChange={e => biochange(e.target.value)} className="form-control"></textarea>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
-                            <div className="card-footer">
+                            <div className="card-footer mt-3">
                                 <button type="submit" className="btn btn-primary">Register</button>
                                 <Link className="btn btn-danger ms-2" to={'/login'}>Back</Link>
                             </div>
