@@ -7,8 +7,22 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
   secure: true
 });
+
+
+// const storage =new CloudinaryStorage({
+//   cloudinary,params:{
+//     folder:"Reeels",
+//     allowedFormats:["mp4"],
+//   }
+// });
+// module.exports={cloudinary,storage};
+
+
+
+
+
  const generateSignature = (req, res, next) => {
-  // const { folder } = req.body;
+  // const { folder } = req.query;
 
   // if (!folder) {
   //   res.status(400);
@@ -20,7 +34,7 @@ cloudinary.config({
 
     const signature = cloudinary.utils.api_sign_request({
       timestamp,
-     // folder
+     folder
     }, process.env.CLOUDINARY_API_SECRET);
 
     res.status(200).json({ timestamp, signature })
