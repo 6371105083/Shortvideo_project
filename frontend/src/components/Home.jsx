@@ -1,28 +1,102 @@
-import { Link } from 'react-router-dom';
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import NavBar from './subComponents/Navbar';
 
 const Home = () => {
+  const [videos, setVideos] = useState([]);
+  const [likes, setLikes] = useState({});
+  //Comments
+  const [comments,setComments]=useState({})
+
+  useEffect(() => {
+    async function fetchVideos() {
+      try {
+        const response = await axios.get('http://localhost:5000/postedVideo');
+        setVideos(response.data);
+      } catch (error) {
+        console.error('Error fetching videos:', error);
+      }
+    }
+
+    async function fetchLikes() {
+      try {
+        const response = await axios.get('http://localhost:5000/reel-likes');
+        const likesData = response.data.reduce((acc, like) => {
+          acc[like.reel_id] = like;
+          return acc;
+        }, {});
+
+        setLikes(likesData);
+      } catch (error) {
+        console.error('Error fetching likes:', error);
+      }
+    }
+
+    fetchVideos();
+    fetchLikes();
+   }, []);
+
+   async function toggleLike(reel_id) {
+    const liked = !!likes[reel_id]; // Check if the video is already liked
+    const user_id = "your_user_id"; // Replace with the actual user ID
+
+    try {
+      if (liked) {
+        // If the video is already liked, dislike it
+        await axios.delete(`http://localhost:5000/reel-likes/${likes[reel_id]._id}`);
+      } else {
+        // If the video is not liked, like it
+        await axios.post('http://localhost:5000/reel-likes', {
+          reel_id,
+          user_id,
+        });
+      }
+
+      // Update the state of likes after the like/dislike action
+      setLikes((prevLikes) => ({
+        ...prevLikes,
+        [reel_id]: liked ? undefined : { reel_id, user_id },
+      }));
+    } catch (error) {
+      console.error('Error toggling like:', error);
+    }
+  
+
+
+//ForComments
+
+
+  }
+
   return (
     <>
       <NavBar />
-      <h1 className="space-x-4 text-rose-800 mt-5 text-center">Welcome to Hyscaler</h1>
+      <h1 className="space-x-4 text-rose-800 mt-3 text-center">Welcome to Hyscaler</h1>
       <div className="font-semibold">
-        <ul className='list-disc'>
-          <li>"Innovation is the ability to see change as an opportunity, not a threat." - Steve Jobs</li>
-          <li>"Technology is best when it brings people together." - Matt Mullenweg</li>
-          <li>"The only way to do great work is to love what you do." - Steve Jobs</li>
-          <li>"The art of progress is to preserve order amid change and to preserve change amid order." - Alfred North Whitehead</li>
-          <li>"The future is not something we enter. The future is something we create." - Leonard I. Sweet</li>
-          <li>"In the modern world of business, it is useless to be a creative, original thinker unless you can also sell what you create." - David Ogilvy</li>
-          <li>"The only thing that's constant in the technology world is change. Embrace it." - Larry Ellison</li>
-          <li>"The technology you use impresses no one. The experience you create with it is everything." - Sean Gerety</li>
-          <li>"We are stuck with technology when what we really want is just stuff that works." - Douglas Adams</li>
-          <li>"Great companies are built on great products." - Elon Musk</li>
-          <li>"Do not wait for leaders; do it alone, person to person." - Mother Teresa</li>
-          <li>"The greatest danger in times of turbulence is not the turbulence; it is to act with yesterday's logic." - Peter Drucker</li>
-          <li>"In a world that is changing quickly, the only strategy that is guaranteed to fail is not taking risks." - Mark Zuckerberg</li>
-          <li>"We cannot solve our problems with the same thinking we used when we created them." - Albert Einstein</li>
-          <li>"Technology is nothing. What's important is that you have a faith in people, that they're basically good and smart, and if you give them tools, they'll do wonderful things with them." - Steve Jobs</li>
+        <ul className="flex flex-wrap justify-normal ms-20">
+          {videos.map((video) => (
+            <li key={video._id} className="m-2 text-left  mb-5">
+              <div className="relative ">
+                <div className="p-2 absolute  left-0 w-full text-left overflow-hidden whitespace-nowrap">
+                  {video.caption}
+                </div>
+               
+                <video controls width="250" className="pt-5">
+                  <source src={video.videoUrl} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                <div className="flex justify-start items-center">
+                <button
+                    onClick={() => toggleLike(video.user_id)}
+                    className={`text-xl cursor-pointer ${likes[video.user_id] ? 'text-red-500' : 'text-gray-500'}`}
+                  >
+                    ❤️ {likes[video.user_id] ? 'Liked' : 'Like'}
+                  </button>
+                </div>
+              </div>
+            </li>
+          ))}
         </ul>
       </div>
     </>

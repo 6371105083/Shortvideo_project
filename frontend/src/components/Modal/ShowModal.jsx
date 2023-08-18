@@ -20,8 +20,8 @@ const ShowModal = () => {
     data.append("upload_preset", "videos_preset");
     console.log(video);
 
-    let cloudName = "df2xrpvtg";
 
+    let cloudName = "df2xrpvtg";
 
     try {
       let resourceType = "video";

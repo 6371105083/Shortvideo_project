@@ -14,7 +14,7 @@ const createVideo = async (req, res, next) => {
     user_id, videoUrl,caption,created_at
     });
 
-    res.status(201).json({
+    res.status(201).json({ 
       success: true,
       video,
     });
@@ -23,5 +23,17 @@ const createVideo = async (req, res, next) => {
     res.status(500);
     next(error);
   }
-}
-module.exports = createVideo;
+
+};
+  const getAllVideo = async (req, res) => {
+    try {
+      const videos = await Video.find(); // Assuming you want to fetch all videos
+      res.json(videos);
+    } catch (error) {
+      console.error('Error fetching videos:', error);
+      res.status(500).json({ error: 'Error fetching videos' });
+    }
+  };
+
+
+module.exports = {createVideo,getAllVideo};

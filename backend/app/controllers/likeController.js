@@ -7,7 +7,7 @@ const createReelLike = async (req, res) => {
     const newReelLike = new ReelLike({ user_id, reel_id  });
     await newReelLike.save();
 
-    res.status(201).json({ message: 'Reel like created successfully', reelLike: newReelLike });
+    res.status(201).json({ reel_id,user_id,message: 'Reel like created successfully', reelLike: newReelLike });
   } catch (error) {
     console.error('Error creating reel like:', error);
     res.status(500).json({ error: 'Error creating reel like' });
@@ -23,7 +23,7 @@ const getAllReelLikes = async (req, res) => {
     res.status(500).json({ error: 'Error fetching reel likes' });
   }
 };
-
+ 
 const deleteReelLikeById = async (req, res) => {
   try {
     const deletedReelLike = await ReelLike.findByIdAndRemove(req.params.id);
