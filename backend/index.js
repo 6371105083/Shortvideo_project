@@ -8,6 +8,7 @@ const user = require("./app/routes/userRoutes")
 const errorHandler = require("./app/middlewares/authMiddleware")
 const likesRoutes = require("./app/routes/likesRoutes.js")
 const commentsRoutes = require("./app/routes/commentsRoutes.js")
+const postRoutes = require("./app/routes/postRoutes.js")
 
 
 dotenv.config();
@@ -49,6 +50,7 @@ app.use(user);
 app.use(likesRoutes);
 app.use(commentsRoutes);
 app.use(errorHandler);
+app.use(postRoutes);
 
 
 
