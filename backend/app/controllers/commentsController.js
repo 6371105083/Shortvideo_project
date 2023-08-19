@@ -10,11 +10,14 @@ const createReelComment = async (req, res, next) => {
             reel_id,
             text,
             parent_id
-        });
+        }); 
 
         res.status(201).json({
             success: true,
             reelComment,
+            user_id,
+            reel_id,
+            parent_id,
         });
     } catch (error) {
         console.log(error);
@@ -33,6 +36,9 @@ const getAllReelComments = async (req, res, next) => {
         res.status(200).json({
             success: true,
             reelComments,
+            user_id,
+            reel_id,
+            parent_id
         });
     } catch (error) {
         console.log(error);

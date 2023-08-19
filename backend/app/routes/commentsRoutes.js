@@ -2,7 +2,7 @@
 const express = require('express');
 const {
   createReelComment,
-  getAllReelComments,
+  getAllReelComments, 
   deleteReelCommentById,
 } = require('../controllers/commentsController');
 
