@@ -33,7 +33,7 @@ const ShowModal = () => {
 
       return secure_url;
     } catch (error) {
-      console.error(error);
+      console.error(error); 
     }
   };
 

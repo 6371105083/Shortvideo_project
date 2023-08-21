@@ -10,6 +10,8 @@ const likesRoutes = require("./app/routes/likesRoutes.js")
 const commentsRoutes = require("./app/routes/commentsRoutes.js")
 const postRoutes = require("./app/routes/postRoutes.js")
 
+const imageRoutes = require('./app/routes/imageRoutes.js');
+
 
 
 dotenv.config();
@@ -52,6 +54,7 @@ app.use(likesRoutes);
 app.use(commentsRoutes);
 app.use(errorHandler);
 app.use(postRoutes);
+app.use(imageRoutes);
 
 
 

@@ -9,8 +9,7 @@ import CommentsModal from './Modal/CommentsModal.jsx';
 const Home = () => {
   const [videos, setVideos] = useState([]);
   const [likes, setLikes] = useState({});
-  //Comments
-  const [comments, setComments] = useState({})
+
 
   useEffect(() => {
     async function fetchVideos() {
@@ -21,19 +20,7 @@ const Home = () => {
         console.error('Error fetching videos:', error);
       }
     }
-    //comments
-
-
-    async function fetchComments() {
-      try {
-
-      } catch (error) {
-
-      }
-    }
-
-
-
+  
 
 
 
@@ -66,20 +53,20 @@ const Home = () => {
     const user_id = "your_user_id"; // Replace with the actual user ID
 
     try {
-      if (liked) {
+      // if (liked) { 
 
-        // If the video is already liked, dislike it
+      //   // If the video is already liked, dislike it
         await axios.post('http://localhost:5000/toggle-reel-like', {
           reel_id,
           user_id,
         });
-      } else {
-        // If the video is not liked, like it
-        await axios.post('http://localhost:5000/toggle-reel-like', {
-          reel_id,
-          user_id,
-        });
-      }
+      // } else {
+      //   // If the video is not liked, like it
+      //   await axios.post('http://localhost:5000/toggle-reel-like', {
+      //     reel_id,
+      //     user_id,
+      //   });
+      // }
 
       // Update the state of likes after the like/dislike action
       setLikes((prevLikes) => ({
