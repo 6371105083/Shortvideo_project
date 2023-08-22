@@ -33,6 +33,10 @@ const getAllReelComments = async (req, res, next) => {
     try {
         const reelComments = await ReelComment.find();
 
+        const user_id = req.user_id; 
+        const reel_id = req.params.reel_id; 
+        const parent_id = req.query.parentId; 
+
         res.status(200).json({
             success: true,
             reelComments,
@@ -44,11 +48,32 @@ const getAllReelComments = async (req, res, next) => {
         console.log(error);
         res.status(500).json({
             success: false,
-            error: 'An error occurred while fetching reel comments',
+            error:  error.message,
         });
     }
 };
+const getAllReelCommentsByReelId = async(req,res)=>{
+   
+    try{
+        
+        const reel_id = req.params.reel_id; 
+        const reelComments = await ReelComment.find({reel_id});
+       
+        res.status(200).json({
+            success:true,
+            reelComments,
 
+        })
+      
+
+    }catch(error){
+        console.log(error)
+        res.status(500).json({
+            success: false,
+            error:  error.message,
+        });
+    }
+} 
 // Delete a reel comment by ID
 const deleteReelCommentById = async (req, res, next) => {
     const commentId = req.params.id;
@@ -81,4 +106,5 @@ module.exports = {
     createReelComment,
     getAllReelComments,
     deleteReelCommentById,
+    getAllReelCommentsByReelId
 };

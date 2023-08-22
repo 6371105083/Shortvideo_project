@@ -30,7 +30,7 @@ const Home = () => {
       try {
         const response = await axios.get('http://localhost:5000/reel-likes');
         const likesData = response.data.reduce((acc, like) => {
-          console.log('res' + response.data)
+         
           acc[like.reel_id] = like;
           return acc;
         }, {});
@@ -49,8 +49,8 @@ const Home = () => {
 
   async function toggleLike(reel_id) {
 
-    const liked = !!likes[reel_id]; // Check if the video is already liked
-    const user_id = "your_user_id"; // Replace with the actual user ID
+    const liked = !!likes[reel_id]; 
+    const user_id = "your_user_id"; //Check 
 
     try {
       // if (liked) { 
